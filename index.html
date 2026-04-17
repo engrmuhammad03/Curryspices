@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>NAKHAT Spices | Authentic Nigerian Spice Blends</title>
+    <!-- Font Awesome 6 (free icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #F3EDE2;
+            color: #4F4A45;
+            overflow-x: hidden;
+        }
+
+        nav {
+            background: #6B3E2E;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(75, 55, 45, 0.25);
+            border-bottom: 2px solid #D9A13B;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #D9A13B;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: block;
+            border: 2px solid #D9A13B;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(217, 161, 59, 0.3);
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #D9A13B;
+            letter-spacing: 1.5px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-shadow: 1px 1px 0px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            .logo-img { height: 40px; }
+            .logo-text { font-size: 1rem; }
+            .logo { gap: 0.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            .logo-img { height: 35px; }
+            .logo-text { font-size: 0.85rem; }
+            .logo { gap: 0.4rem; }
+        }
+
+        @media (max-width: 380px) {
+            .logo-img { height: 30px; }
+            .logo-text { font-size: 0.75rem; }
+        }
+
+        @media (max-height: 500px) and (orientation: landscape) {
+            nav { padding: 0.5rem 1rem; }
+            .logo-img { height: 35px; }
+            .logo-text { font-size: 0.9rem; }
+        }
+
+        @media (min-width: 1400px) {
+            .logo-img { height: 55px; }
+            .logo-text { font-size: 1.4rem; }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #F3EDE2;
+            text-decoration: none;
+            transition: color 0.3s, letter-spacing 0.2s;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-links a:hover { color: #D9A13B; letter-spacing: 0.5px; }
+
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(75, 55, 45, 0.9);
+            z-index: 98;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .menu-overlay.active { opacity: 1; visibility: visible; }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+            background: transparent;
+            border: none;
+            z-index: 101;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #F3EDE2;
+            margin: 3px 0;
+            transition: all 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); background: #D9A13B; }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); background: #D9A13B; }
+
+        .hero {
+            position: relative;
+            color: #F3EDE2;
+            padding: 6rem 2rem;
+            text-align: center;
+            overflow: hidden;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero-slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+        .hero-slide.active { opacity: 1; }
+        .hero-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(75, 55, 45, 0.88) 0%, rgba(107, 62, 46, 0.82) 100%);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease;
+        }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; text-shadow: 2px 2px 8px rgba(0,0,0,0.4); color: #F3EDE2; letter-spacing: 1px; }
+        .hero p { font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.95; color: #DCC9B6; }
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: #D9A13B;
+            color: #4F4A45;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+            margin: 0.5rem;
+            border: none;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+        }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0,0,0,0.25); background: #C48B2A; color: #F3EDE2; }
+        .btn-outline { background: transparent; border: 2px solid #D9A13B; color: #D9A13B; }
+        .btn-outline:hover { background: #D9A13B; color: #6B3E2E; border-color: #D9A13B; }
+
+        section { padding: 4rem 2rem; max-width: 100%; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 2rem; margin-bottom: 1rem; color: #6B3E2E; font-weight: 800; letter-spacing: -0.3px; position: relative; }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: #D9A13B;
+            margin: 0.8rem auto 0;
+            border-radius: 2px;
+        }
+        .section-subtitle { text-align: center; color: #7A6B5D; margin-bottom: 3rem; font-style: italic; }
+
+        .about { background: #F3EDE2; }
+        .about-content { max-width: 900px; margin: 0 auto; text-align: center; }
+        .about p { margin-bottom: 1.5rem; font-size: 1.05rem; color: #4F4A45; }
+        .about strong { color: #D9A13B; font-weight: 800; }
+
+        .products-section {
+            background: linear-gradient(135deg, #F3EDE2 0%, #FFF9F0 100%);
+            overflow: hidden;
+        }
+        .products-carousel-container {
+            position: relative;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 60px;
+            touch-action: pan-y pinch-zoom;
+        }
+        .products-carousel {
+            overflow: hidden;
+            width: 100%;
+            cursor: grab;
+        }
+        .products-carousel:active { cursor: grabbing; }
+        .products-track {
+            display: flex;
+            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            will-change: transform;
+        }
+        .product-slide {
+            flex-shrink: 0;
+            width: 100%;
+            padding: 0 10px;
+        }
+        .slide-cards-wrapper {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+        }
+        .product-card {
+            flex: 1;
+            background: #FFFFFF;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 25px 45px rgba(107, 62, 46, 0.1);
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            border: 1px solid rgba(217, 161, 59, 0.2);
+        }
+        .product-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 35px 55px rgba(107, 62, 46, 0.2);
+            border-color: #D9A13B;
+        }
+        .product-image {
+            height: 280px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .product-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to top, rgba(107, 62, 46, 0.5), transparent);
+        }
+        .product-badge {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            background: #D9A13B;
+            color: #4F4A45;
+            padding: 7px 16px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            z-index: 2;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+            letter-spacing: 0.5px;
+        }
+        .product-info { 
+            padding: 1.5rem 1.5rem 1.8rem;
+            text-align: center; 
+            flex: 1; 
+            display: flex; 
+            flex-direction: column;
+            background: #FFFFFF;
+        }
+        .product-info h3 { 
+            color: #6B3E2E; 
+            font-size: 1.5rem; 
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+        .product-info .product-desc { 
+            color: #7A6B5D; 
+            font-size: 0.9rem; 
+            margin-bottom: 1rem; 
+            line-height: 1.5;
+        }
+        .product-ingredients {
+            background: #F9F5EE;
+            padding: 0.8rem;
+            border-radius: 16px;
+            margin: 0.8rem 0 1rem;
+            text-align: left;
+            border-left: 3px solid #D9A13B;
+        }
+        .product-ingredients h4 {
+            font-size: 0.8rem;
+            color: #6B3E2E;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .ingredient-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .ingredient-list li {
+            background: #FFFFFF;
+            padding: 3px 10px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            color: #6B3E2E;
+            font-weight: 500;
+            border: 1px solid #DCC9B6;
+        }
+        .product-price { 
+            color: #D9A13B; 
+            font-weight: 800; 
+            font-size: 1.5rem; 
+            margin: 0.5rem 0 0.3rem;
+        }
+        .product-tag {
+            display: inline-block;
+            background: #F3EDE2;
+            padding: 5px 14px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            color: #6B3E2E;
+            font-weight: 700;
+            align-self: center;
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+        .product-btn {
+            margin-top: auto;
+            padding: 0.9rem;
+            background: #6B3E2E;
+            color: #F3EDE2;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+        .product-btn:hover { background: #D9A13B; color: #4F4A45; transform: scale(1.02); box-shadow: 0 5px 15px rgba(217, 161, 59, 0.3); }
+
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px;
+            height: 48px;
+            background: #6B3E2E;
+            color: #D9A13B;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.2);
+        }
+        .carousel-arrow:hover { background: #D9A13B; color: #6B3E2E; transform: translateY(-50%) scale(1.1); }
+        .carousel-arrow.prev { left: 0; }
+        .carousel-arrow.next { right: 0; }
+
+        .products-dots {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2.5rem;
+        }
+        .product-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #DCC9B6;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .product-dot.active { background: #D9A13B; width: 30px; border-radius: 6px; }
+
+        .features { 
+            position: relative; 
+            overflow: hidden; 
+            background: linear-gradient(135deg, #FFF9F0 0%, #F3EDE2 100%); 
+        }
+        
+        .floating-ingredients { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            pointer-events: none; 
+            z-index: 0; 
+        }
+        
+        .floating-item { 
+            position: absolute; 
+            font-size: 2.5rem; 
+            opacity: 0.1; 
+            animation: float 20s infinite ease-in-out;
+            color: #D9A13B;
+        }
+        
+        @keyframes float { 
+            0%,100%{transform:translateY(0) rotate(0deg);} 
+            25%{transform:translateY(-35px) rotate(8deg);} 
+            50%{transform:translateY(15px) rotate(-5deg);} 
+            75%{transform:translateY(35px) rotate(5deg);} 
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 28px;
+            text-align: center;
+            box-shadow: 0 12px 30px rgba(107, 62, 46, 0.08);
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateX(-60px);
+            color: #4F4A45;
+            border: 1px solid rgba(217, 161, 59, 0.25);
+        }
+        
+        .feature-card h3 {
+            color: #6B3E2E;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+        
+        .feature-card p {
+            color: #7A6B5D;
+            line-height: 1.6;
+        }
+        
+        .feature-card.animate-in {
+            animation: swipeInFromLeft 0.6s ease forwards;
+        }
+        
+        .feature-card:nth-child(1).animate-in { animation-delay: 0.1s; }
+        .feature-card:nth-child(2).animate-in { animation-delay: 0.2s; }
+        .feature-card:nth-child(3).animate-in { animation-delay: 0.3s; }
+        .feature-card:nth-child(4).animate-in { animation-delay: 0.4s; }
+        
+        @keyframes swipeInFromLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 45px rgba(107, 62, 46, 0.15);
+            background: rgba(255, 255, 255, 0.98);
+            border-color: #D9A13B;
+        }
+        
+        .testimonials { background: #F3EDE2; scroll-margin-top:80px; position: relative; }
+        .testimonial-carousel { 
+            position: relative; 
+            max-width: 1100px; 
+            margin: 0 auto; 
+            overflow: hidden;
+            padding: 0 40px;
+        }
+        .testimonial-track { display: flex; transition: transform 0.5s ease; }
+        .testimonial-slide { 
+            min-width: 100%; 
+            padding: 1rem 2rem;
+        }
+        .testimonial-card { 
+            background: #FFFFFF; 
+            padding: 1.8rem 2.2rem; 
+            border-radius: 28px; 
+            box-shadow: 0 15px 35px rgba(107, 62, 46, 0.08); 
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            border: 1px solid rgba(217, 161, 59, 0.2);
+            transition: all 0.3s ease;
+        }
+        .testimonial-card:hover {
+            border-color: #D9A13B;
+            box-shadow: 0 20px 40px rgba(107, 62, 46, 0.12);
+        }
+        .stars { color: #D9A13B; font-size: 1.2rem; letter-spacing: 4px; margin-bottom: 0.75rem; display: inline-block; }
+        .testimonial-text { font-style: italic; font-size: 1rem; margin: 0.75rem 0; color: #4F4A45; line-height: 1.5; }
+        .testimonial-author { margin-top: 0.75rem; display: flex; align-items: center; justify-content: center; gap: 12px; }
+        .author-avatar { width: 45px; height: 45px; background: #D9A13B; color: #6B3E2E; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; }
+        .testimonial-author h4 { margin: 0; color: #6B3E2E; font-size: 1rem; font-weight: 700; }
+        .testimonial-author p { margin: 0; font-size: 0.75rem; color: #9B8B7A; }
+        
+        .testimonial-btn { 
+            position: absolute; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            background: #6B3E2E; 
+            color: #D9A13B; 
+            border: none; 
+            width: 45px; 
+            height: 45px; 
+            border-radius: 50%; 
+            cursor: pointer; 
+            z-index: 5; 
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        .testimonial-btn:hover { background: #D9A13B; color: #6B3E2E; transform: translateY(-50%) scale(1.05); }
+        .testimonial-btn.prev { left: 0; }
+        .testimonial-btn.next { right: 0; }
+        
+        .testimonial-indicators { display: flex; justify-content: center; gap: 0.5rem; margin-top: 1.5rem; }
+        .testimonial-indicator { width: 8px; height: 8px; border-radius: 50%; background: #DCC9B6; cursor: pointer; transition: 0.3s; }
+        .testimonial-indicator.active { background: #D9A13B; width: 28px; border-radius: 6px; }
+        
+        .founder-quote { position:relative; color:#F3EDE2; text-align:center; padding:5rem 2rem; background-image:url('https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=1200'); background-size:cover; background-attachment:fixed; }
+        .founder-quote::before { content:''; position:absolute; top:0; left:0; width:100%; height:100%; background:linear-gradient(135deg, rgba(75,55,45,0.9), rgba(107,62,46,0.85)); z-index:1; }
+        .quote-container { position:relative; z-index:2; max-width:800px; margin:0 auto; background:rgba(243,237,226,0.12); backdrop-filter:blur(14px); padding:3rem; border-radius:32px; border:1px solid rgba(217,161,59,0.3); }
+        .quote-container .quote-icon { font-size: 3rem; color: #D9A13B; margin-bottom: 1rem; font-family: serif; }
+        .quote-text { font-size: 1.3rem; line-height: 1.5; margin-bottom: 1.5rem; font-style: italic; font-weight: 400; }
+        .founder-name { font-weight: 800; color: #D9A13B; margin-bottom: 0.3rem; font-size: 1.1rem; letter-spacing: 1px; }
+        .founder-title { font-size: 0.8rem; opacity: 0.9; letter-spacing: 0.5px; }
+        
+        .cta { text-align:center; background: linear-gradient(135deg, #D9A13B, #C48B2A); padding:4rem 2rem; color: #F3EDE2; }
+        .cta h2 { color: #F3EDE2; font-weight: 800; }
+        .cta .btn { background: #F3EDE2; color: #6B3E2E; }
+        .cta .btn:hover { background: #6B3E2E; color: #F3EDE2; }
+        .cta .btn-outline { border-color: #F3EDE2; color: #F3EDE2; background: transparent; }
+        .cta .btn-outline:hover { background: #F3EDE2; color: #6B3E2E; }
+        
+        .contact { background: #F3EDE2; padding:5rem 2rem; }
+        .contact-form { background:#FFFFFF; padding:3rem; border-radius:28px; max-width:700px; margin:0 auto; box-shadow:0 15px 40px rgba(107,62,46,0.1); border:1px solid rgba(217,161,59,0.2); }
+        .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+        .form-group { margin-bottom:1.5rem; }
+        .form-group label { font-weight:600; display:block; margin-bottom:0.5rem; color: #6B3E2E; }
+        .form-group input, .form-group select, .form-group textarea { width:100%; padding:1rem; border:2px solid #F3EDE2; border-radius:14px; font-family:inherit; background: #FFFFFF; transition: 0.3s; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: #D9A13B; box-shadow: 0 0 0 4px rgba(217, 161, 59, 0.15); }
+        .submit-btn { width:100%; padding:1rem; background:#6B3E2E; color:#F3EDE2; border:none; border-radius:50px; font-weight:700; cursor:pointer; transition:0.3s; letter-spacing: 0.5px; }
+        .submit-btn:hover { background:#D9A13B; color:#4F4A45; transform:translateY(-2px); box-shadow: 0 5px 15px rgba(217,161,59,0.3); }
+        .submit-btn:disabled { background:#DCC9B6; cursor:not-allowed; transform:none; }
+        
+        footer { 
+            background: #4F4A45; 
+            color: #DCC9B6; 
+            padding: 3rem 2rem 1rem; 
+            text-align: center; 
+            border-top: 3px solid #D9A13B;
+        }
+        .footer-info p { margin: 0.5rem 0; color: #DCC9B6; }
+        .contact-link { color: #D9A13B; text-decoration: none; font-weight: 500; }
+        .contact-link:hover { text-decoration: underline; color: #F3EDE2; }
+        .footer-bottom { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #7A6B5D; color: #B8A99A; }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #F3EDE2;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 0.6s linear infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        
+        @keyframes spin { to { transform: rotate(360deg); } }
+        
+        @media (max-width:768px) {
+            .menu-toggle { display: flex; }
+            .nav-links { position:fixed; top:0; right:-100%; width:70%; height:100vh; background:#6B3E2E; flex-direction:column; justify-content:center; gap:2rem; transition:right 0.3s ease; z-index:1000; padding:2rem; box-shadow: -8px 0 25px rgba(0,0,0,0.2); }
+            .nav-links.active { right:0; }
+            .products-carousel-container { padding:0 35px; }
+            .slide-cards-wrapper { gap:15px; }
+            .product-image { height:220px; }
+            .form-row { grid-template-columns:1fr; }
+            .testimonial-carousel { padding: 0 30px; }
+            .testimonial-btn { width: 35px; height: 35px; font-size: 1rem; }
+            .testimonial-card { padding: 1rem 1.2rem; }
+            .testimonial-text { font-size: 0.9rem; }
+            .floating-item { font-size: 1.8rem; opacity: 0.08; }
+            .feature-card { padding: 1.5rem; }
+        }
+        
+        @media (max-width: 480px) {
+            .testimonial-carousel { padding: 0 20px; }
+            .testimonial-btn { width: 30px; height: 30px; font-size: 0.9rem; }
+            .testimonial-card { padding: 0.8rem 1rem; }
+            .testimonial-text { font-size: 0.85rem; }
+            .feature-card h3 { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-container">
+        <a href="index.html" class="logo">
+            <img src="Nakhat_logo.png" alt="NAKHAT Spices Logo" class="logo-img" onerror="this.onerror=null; this.src='https://placehold.co/100x100/D9A13B/6B3E2E?text=NAKHAT'">
+            <span class="logo-text">NAKHAT Spices</span>
+        </a>
+        <button class="menu-toggle" id="menuToggleBtn" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#products">Products</a></li>
+            <li><a href="order.html">Order Now</a></li>
+            <li><a href="ingredients.html">Ingredients & Benefits</a></li>
+            <li><a href="index.html#testimonials-section">Testimonials</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="menu-overlay" id="menuOverlay"></div>
+
+<section class="hero">
+    <div class="hero-slideshow"><div class="hero-slide active" style="background-image: url('https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=1200');"></div><div class="hero-slide" style="background-image: url('https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=1200');"></div><div class="hero-slide" style="background-image: url('https://images.pexels.com/photos/958543/pexels-photo-958543.jpeg?auto=compress&cs=tinysrgb&w=1200');"></div></div>
+    <div class="hero-content"><h1>Ignite Your Taste Buds with NAKHAT</h1><p>Authentic Nigerian spice blends crafted with heritage, passion, and natural ingredients.</p><a href="index.html#products" class="btn">Explore Our Spices</a><a href="index.html#about" class="btn btn-outline">Our Story</a></div>
+</section>
+
+<section class="about" id="about"><h2 class="section-title">Who Are We?</h2><div class="about-content"><p>NAKHAT Spices is a premium Nigerian spice brand founded by <strong>Aminah Hadi Abubakar</strong> with a mission to bring authentic Northern Nigerian flavors to kitchens across the nation.</p><p>Born from childhood memories of vibrant local markets in Sokoto, we blend tradition with modern quality standards. We are a team of passionate food lovers dedicated to preserving Nigeria's rich culinary heritage through carefully crafted spice blends that tell a story of culture, family, and excellence.</p><p>We source the finest natural ingredients and combine them using traditional recipes with a modern twist. Each NAKHAT spice blend is meticulously formulated to deliver consistent, exceptional flavor in every dish.</p></div></section>
+
+<section class="products-section" id="products">
+    <h2 class="section-title">Our Premium Spice Collection</h2>
+    <p class="section-subtitle">Authentic Nigerian spices for every dish — order now!</p>
+    <div class="products-carousel-container">
+        <button class="carousel-arrow prev" id="productsPrevBtn">❮</button>
+        <div class="products-carousel" id="productsCarousel"><div class="products-track" id="productsTrack"></div></div>
+        <button class="carousel-arrow next" id="productsNextBtn">❯</button>
+    </div>
+    <div class="products-dots" id="productsDots"></div>
+</section>
+
+<section class="features" id="features-section">
+    <div class="floating-ingredients">
+        <span class="floating-item" style="top:2%; left:2%; animation-duration: 18s;">🌶️</span>
+        <span class="floating-item" style="top:5%; left:20%; animation-duration: 22s;">🧄</span>
+        <span class="floating-item" style="top:8%; right:3%; animation-duration: 20s;">🧅</span>
+        <span class="floating-item" style="top:12%; left:10%; animation-duration: 25s;">🫚</span>
+        <span class="floating-item" style="top:15%; right:15%; animation-duration: 17s;">🌿</span>
+        <span class="floating-item" style="top:20%; left:30%; animation-duration: 23s;">🫛</span>
+        <span class="floating-item" style="top:25%; right:25%; animation-duration: 19s;">🌾</span>
+        <span class="floating-item" style="top:30%; left:45%; animation-duration: 21s;">🫘</span>
+        <span class="floating-item" style="top:35%; right:40%; animation-duration: 24s;">🌽</span>
+        <span class="floating-item" style="top:40%; left:55%; animation-duration: 16s;">🥜</span>
+        <span class="floating-item" style="top:45%; right:55%; animation-duration: 22s;">🍃</span>
+        <span class="floating-item" style="top:50%; left:70%; animation-duration: 18s;">🌰</span>
+        <span class="floating-item" style="top:55%; right:70%; animation-duration: 20s;">🌱</span>
+        <span class="floating-item" style="top:60%; left:80%; animation-duration: 26s;">🍂</span>
+        <span class="floating-item" style="top:65%; right:10%; animation-duration: 15s;">🌻</span>
+        <span class="floating-item" style="top:70%; left:15%; animation-duration: 24s;">🍄</span>
+        <span class="floating-item" style="top:75%; right:30%; animation-duration: 19s;">🥥</span>
+        <span class="floating-item" style="top:80%; left:25%; animation-duration: 21s;">🫒</span>
+        <span class="floating-item" style="top:85%; right:45%; animation-duration: 17s;">🍋</span>
+        <span class="floating-item" style="top:90%; left:35%; animation-duration: 23s;">🍊</span>
+    </div>
+    <h2 class="section-title">What We Do</h2>
+    <p class="section-subtitle">Quality and authenticity in every blend</p>
+    <div class="features-grid" id="featuresGrid">
+        <div class="feature-card"><h3>🌿 100% Natural</h3><p>No artificial additives — just pure, authentic spices.</p></div>
+        <div class="feature-card"><h3>💚 Health Benefits</h3><p>Packed with antioxidants and traditional wellness wisdom.</p></div>
+        <div class="feature-card"><h3>📜 Traditional Recipes</h3><p>Authentic Northern Nigerian flavors passed down through generations.</p></div>
+        <div class="feature-card"><h3>🚚 Fast Delivery</h3><p>Delivered fresh across Nigeria with secure packaging.</p></div>
+    </div>
+</section>
+
+<section class="testimonials" id="testimonials-section">
+    <h2 class="section-title">What Our Customers Say</h2>
+    <p class="section-subtitle">Join thousands of happy customers</p>
+    <div class="testimonial-carousel">
+        <button class="testimonial-btn prev" id="testPrevBtn">❮</button>
+        <button class="testimonial-btn next" id="testNextBtn">❯</button>
+        <div class="testimonial-track" id="testimonialTrack">
+            <div class="testimonial-slide"><div class="testimonial-card"><div class="stars">★★★★★</div><p class="testimonial-text">"I have used a lot of jollof spice blends, but Nakhat really stood out for me. The aroma alone when it hits hot oil is super amazing!"</p><div class="testimonial-author"><div class="author-avatar">N</div><div><h4>Nafisa</h4><p>Kaduna, Nigeria</p></div></div></div></div>
+            <div class="testimonial-slide"><div class="testimonial-card"><div class="stars">★★★★★</div><p class="testimonial-text">"This spice blend is a game-changer! I added it to my morning scrambled eggs, and it completely elevated the flavor."</p><div class="testimonial-author"><div class="author-avatar">M</div><div><h4>Mummy Nur</h4><p>Abuja, Nigeria</p></div></div></div></div>
+            <div class="testimonial-slide"><div class="testimonial-card"><div class="stars">★★★★★</div><p class="testimonial-text">"I absolutely love your spices. They are so natural and have such great, fresh flavor. The scent when using them is amazing!"</p><div class="testimonial-author"><div class="author-avatar">H</div><div><h4>Hameeda</h4><p>Kaduna, Nigeria</p></div></div></div></div>
+            <div class="testimonial-slide"><div class="testimonial-card"><div class="stars">★★★★★</div><p class="testimonial-text">"NAKHAT Pepper Soup Spice is the real deal! My family couldn't stop raving about the rich, authentic taste. Best spice brand in Nigeria!"</p><div class="testimonial-author"><div class="author-avatar">T</div><div><h4>Tunde</h4><p>Lagos, Nigeria</p></div></div></div></div>
+            <div class="testimonial-slide"><div class="testimonial-card"><div class="stars">★★★★★</div><p class="testimonial-text">"As a professional chef, I'm picky about spices. NAKHAT's blends are consistently fresh, aromatic, and bring out the best in traditional Nigerian dishes. Highly recommended!"</p><div class="testimonial-author"><div class="author-avatar">A</div><div><h4>Chef Aisha</h4><p>Abuja, Nigeria</p></div></div></div></div>
+        </div>
+        <div class="testimonial-indicators" id="testimonialIndicators"></div>
+    </div>
+</section>
+
+<section class="founder-quote"><div class="quote-container"><div class="quote-icon">❝</div><div class="quote-text">"At NAKHAT, we believe that great food starts with great ingredients. Each of our spice blends is meticulously crafted to bring the rich tastes of Nigerian heritage to your kitchen."</div><div class="founder-name">Aminah Hadi Abubakar</div><div class="founder-title">Founder & CEO, NAKHAT Spices</div></div></section>
+
+<section class="cta"><h2>Ready to Transform Your Cooking?</h2><p style="margin-bottom: 2rem;">Experience the authentic taste of Nigeria with NAKHAT Spices</p><a href="index.html#products" class="btn">Shop Now</a><a href="order.html" class="btn btn-outline" style="border-color:#F3EDE2; color:#F3EDE2;">Bulk Orders</a></section>
+
+<section class="contact" id="contact">
+    <h2 class="section-title">Get In Touch</h2>
+    <p class="section-subtitle">We'd love to hear from you! Send us a message and we'll respond as soon as possible.</p>
+    <div class="contact-form">
+        <h3 style="text-align:center; color:#6B3E2E; margin-bottom: 1.5rem;">Send Us a Message</h3>
+        <form id="contactForm">
+            <div class="form-row"><div class="form-group"><label>First Name *</label><input type="text" id="firstName" required></div><div class="form-group"><label>Last Name *</label><input type="text" id="lastName" required></div></div>
+            <div class="form-row"><div class="form-group"><label>Email *</label><input type="email" id="email" required></div><div class="form-group"><label>Phone</label><input type="tel" id="phone"></div></div>
+            <div class="form-group"><label>Subject *</label><select id="subject" required><option value="">Select</option><option>General Inquiry</option><option>Product Information</option><option>Bulk Orders</option><option>Customer Support</option><option>Feedback</option></select></div>
+            <div class="form-group"><label>Message *</label><textarea id="message" rows="4" required></textarea></div>
+            <button type="submit" id="contactSubmitBtn" class="submit-btn"><i class="fas fa-paper-plane"></i> Send Message</button>
+        </form>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-content"><div class="footer-info"><h3 style="color:#D9A13B; margin-bottom: 1rem;">NAKHAT Spices — 3TRIPPLE BITES CORNER LTD</h3><p>🏭 Factory: No. 8, New Arkilla Layout, Sokoto, Wamakko LGA, Sokoto State</p><p>🏢 Head Office: No. 37B Isa Kaita Road, Kaduna, Kaduna State</p><p>📧 <a href="mailto:3triplebiteslimited01@gmail.com" class="contact-link">3triplebiteslimited01@gmail.com</a> | 📞 <a href="tel:+2348032519455" class="contact-link">08032519455</a></p></div><div class="footer-bottom"><p>&copy; 2025 NAKHAT Spices. All rights reserved. Made with passion in Nigeria.</p></div></div>
+</footer>
+
+<script>
+    const GOOGLE_SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwa9NxXqLZXkpwJuxYSdD_6pW7p1uSEba1ubp3YqYg95k61q-aYhVOtTV5_AWKpW-eB/exec";
+    
+    // Updated products - only the 10 requested items with new prices
+    const productsData = [
+        { name: "Jollof Spice (Small Pack)", image: "https://images.pexels.com/photos/958543/pexels-photo-958543.jpeg?auto=compress&cs=tinysrgb&w=600", desc: "Authentic Nigerian jollof rice seasoning with rich tomato & pepper notes. Small pack perfect for trial.", price: "₦1,500", tag: "Popular", ingredients: ["Tomato Powder","Red Bell Pepper","Onion","Thyme","Curry Leaf","Ginger"] },
+        { name: "Jollof Spice (Big Pack)", image: "https://images.pexels.com/photos/958543/pexels-photo-958543.jpeg?auto=compress&cs=tinysrgb&w=600", desc: "Authentic Nigerian jollof rice seasoning - big family size for multiple uses.", price: "₦5,000", tag: "Value Size", ingredients: ["Tomato Powder","Red Bell Pepper","Onion","Thyme","Curry Leaf","Ginger"] },
+        { name: "Pepper Soup Spice (Small Pack)", image: "https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=600", desc: "Warming spice blend for authentic Nigerian pepper soup. Small pack size.", price: "₦1,800", tag: "Hot & Spicy", ingredients: ["Negro Pepper","Alligator Pepper","Calabash Nutmeg","Ginger","Cloves","Lemon Grass"] },
+        { name: "Pepper Soup Spice (Big Pack)", image: "https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=600", desc: "Warming pepper soup blend - big pack for regular use.", price: "₦5,500", tag: "Family Size", ingredients: ["Negro Pepper","Alligator Pepper","Calabash Nutmeg","Ginger","Cloves","Lemon Grass"] },
+        { name: "Fried Rice Spice (Small Pack)", image: "https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=600", desc: "Special blend for that perfect Nigerian fried rice with authentic aroma. Small pack.", price: "₦1,500", tag: "Favorite", ingredients: ["Curry Powder","Thyme","Ginger","Garlic","White Pepper","Vegetable Flakes"] },
+        { name: "Fried Rice Spice (Big Pack)", image: "https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=600", desc: "Authentic fried rice spice blend - big pack for parties and large meals.", price: "₦5,000", tag: "Value Size", ingredients: ["Curry Powder","Thyme","Ginger","Garlic","White Pepper","Vegetable Flakes"] },
+        { name: "Curry Spice (Small Pack)", image: "https://images.pexels.com/photos/4041347/pexels-photo-4041347.jpeg?auto=compress&cs=tinysrgb&w=600", desc: "Aromatic curry blend perfect for stews, rice dishes, and meats. Small pack.", price: "₦1,500", tag: "Popular", ingredients: ["Turmeric","Coriander","Cumin","Fenugreek","Black Pepper","Cinnamon"] },
+        { name: "Curry Spice (Big Pack)", image: "https://images.pexels.com/photos/4041347/pexels-photo-4041347.jpeg?auto=compress&cs=tinysrgb&w=600", desc: "Rich aromatic curry spice - big pack for heavy use.", price: "₦5,000", tag: "Value Size", ingredients: ["Turmeric","Coriander","Cumin","Fenugreek","Black Pepper","Cinnamon"] },
+        { name: "Multipurpose Spice (Small Pack)", image: "https://images.pexels.com/photos/277253/pexels-photo-277253.jpeg?auto=compress&cs=tinysrgb&w=600", desc: "All-in-one seasoning for meats, soups, stews, and vegetables. Small pack.", price: "₦1,500", tag: "Versatile", ingredients: ["Onion","Garlic","Ginger","Paprika","Black Pepper","Thyme"] },
+        { name: "Multipurpose Spice (Big Pack)", image: "https://images.pexels.com/photos/277253/pexels-photo-277253.jpeg?auto=compress&cs=tinysrgb&w=600", desc: "All-purpose seasoning - big pack for everyday cooking.", price: "₦5,000", tag: "Family Size", ingredients: ["Onion","Garlic","Ginger","Paprika","Black Pepper","Thyme"] }
+    ];
+
+    let currentProductSlide = 0, slidesPerView = 3, totalSlides = 0;
+    const track = document.getElementById('productsTrack'), dotsContainer = document.getElementById('productsDots');
+    const carouselContainer = document.getElementById('productsCarousel');
+    let touchStartX = 0, touchEndX = 0;
+
+    function getSlidesPerView() { const w = window.innerWidth; if (w <= 768) return 1; if (w <= 1024) return 2; return 3; }
+
+    function renderProducts() {
+        slidesPerView = getSlidesPerView();
+        totalSlides = Math.ceil(productsData.length / slidesPerView);
+        track.innerHTML = '';
+        for (let s = 0; s < totalSlides; s++) {
+            const slideDiv = document.createElement('div'); slideDiv.className = 'product-slide';
+            const wrapper = document.createElement('div'); wrapper.className = 'slide-cards-wrapper';
+            const start = s * slidesPerView, end = Math.min(start + slidesPerView, productsData.length);
+            for (let i = start; i < end; i++) {
+                const p = productsData[i];
+                const card = document.createElement('div'); card.className = 'product-card';
+                const ingredientsHtml = `<div class="product-ingredients"><h4><i class="fas fa-seedling"></i> Key Ingredients</h4><ul class="ingredient-list">${p.ingredients.map(ing => `<li>${ing}</li>`).join('')}</ul></div>`;
+                const orderUrl = `order.html?product=${encodeURIComponent(p.name)}`;
+                card.innerHTML = `<div class="product-image" style="background-image: url('${p.image}');"><div class="product-badge">${p.tag}</div></div><div class="product-info"><h3>${p.name}</h3><p class="product-desc">${p.desc}</p>${ingredientsHtml}<div class="product-price">${p.price}</div><span class="product-tag">✨ Premium Quality</span><a href="${orderUrl}" class="product-btn">Order Now 🛒</a></div>`;
+                wrapper.appendChild(card);
+            }
+            const remaining = slidesPerView - (end - start);
+            for (let k = 0; k < remaining; k++) { const empty = document.createElement('div'); empty.style.flex = '1'; empty.style.visibility = 'hidden'; wrapper.appendChild(empty); }
+            slideDiv.appendChild(wrapper); track.appendChild(slideDiv);
+        }
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < totalSlides; i++) { const dot = document.createElement('div'); dot.className = 'product-dot' + (i === currentProductSlide ? ' active' : ''); dot.addEventListener('click', () => goToSlide(i)); dotsContainer.appendChild(dot); }
+        updateTransform();
+    }
+
+    function updateTransform() { track.style.transform = `translateX(-${currentProductSlide * 100}%)`; document.querySelectorAll('.product-dot').forEach((d,i)=> d.classList.toggle('active', i===currentProductSlide)); }
+    function moveSlide(d) { currentProductSlide = (currentProductSlide + d + totalSlides) % totalSlides; updateTransform(); }
+    function goToSlide(i) { currentProductSlide = i; updateTransform(); }
+    
+    document.getElementById('productsPrevBtn')?.addEventListener('click', () => moveSlide(-1));
+    document.getElementById('productsNextBtn')?.addEventListener('click', () => moveSlide(1));
+    
+    if (carouselContainer) {
+        carouselContainer.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; });
+        carouselContainer.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            const diff = touchEndX - touchStartX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) moveSlide(-1);
+                else moveSlide(1);
+            }
+        });
+    }
+    
+    window.addEventListener('resize', () => { setTimeout(() => { let nv = getSlidesPerView(); if (nv !== slidesPerView) { renderProducts(); if(currentProductSlide >= totalSlides) currentProductSlide = Math.max(0, totalSlides-1); updateTransform(); } }, 100); });
+
+    // Testimonials
+    let testIndex = 0;
+    const testTrack = document.getElementById('testimonialTrack');
+    const testSlides = document.querySelectorAll('.testimonial-slide');
+    const testTotal = testSlides.length;
+    const indicatorsContainer = document.getElementById('testimonialIndicators');
+    
+    function updateTestimonialCarousel() {
+        if(testTrack) testTrack.style.transform = `translateX(-${testIndex * 100}%)`;
+        const indicators = document.querySelectorAll('.testimonial-indicator');
+        indicators.forEach((ind, idx) => { if(idx === testIndex) ind.classList.add('active'); else ind.classList.remove('active'); });
+    }
+    
+    function moveTestimonial(dir) { testIndex = (testIndex + dir + testTotal) % testTotal; updateTestimonialCarousel(); }
+    
+    if(indicatorsContainer && testSlides.length) {
+        indicatorsContainer.innerHTML = '';
+        testSlides.forEach((_, i) => {
+            const dot = document.createElement('div');
+            dot.className = 'testimonial-indicator' + (i === 0 ? ' active' : '');
+            dot.addEventListener('click', () => { testIndex = i; updateTestimonialCarousel(); });
+            indicatorsContainer.appendChild(dot);
+        });
+    }
+    
+    document.getElementById('testPrevBtn')?.addEventListener('click', () => moveTestimonial(-1));
+    document.getElementById('testNextBtn')?.addEventListener('click', () => moveTestimonial(1));
+    setInterval(() => moveTestimonial(1), 6000);
+    
+    // FEATURE CARDS SCROLL-TRIGGERED ANIMATION
+    const featureCards = document.querySelectorAll('.feature-card');
+    
+    function animateFeatureCardsOnScroll() {
+        featureCards.forEach(card => {
+            const cardPosition = card.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            if (cardPosition.top < windowHeight - 100 && !card.classList.contains('animate-in')) {
+                card.classList.add('animate-in');
+            }
+        });
+    }
+    
+    setTimeout(() => { animateFeatureCardsOnScroll(); }, 300);
+    window.addEventListener('scroll', animateFeatureCardsOnScroll);
+    window.addEventListener('resize', animateFeatureCardsOnScroll);
+    
+    // Contact form handler
+    async function submitToGoogleSheets(formData) {
+        if (GOOGLE_SHEET_WEBHOOK_URL.includes("YOUR_DEPLOYMENT_ID")) {
+            console.log("DEMO MODE:", formData);
+            const demoContacts = JSON.parse(localStorage.getItem('nakhat_contact_demo') || '[]');
+            demoContacts.push(formData);
+            localStorage.setItem('nakhat_contact_demo', JSON.stringify(demoContacts));
+            return { success: true };
+        }
+        try {
+            await fetch(GOOGLE_SHEET_WEBHOOK_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(formData) });
+            return { success: true };
+        } catch (error) { throw error; }
+    }
+    
+    async function handleContactSubmit(e) {
+        e.preventDefault();
+        const firstName = document.getElementById('firstName').value.trim();
+        const lastName = document.getElementById('lastName').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const subject = document.getElementById('subject').value;
+        const message = document.getElementById('message').value.trim();
+        if (!firstName || !lastName || !email || !subject || !message) { alert("Please fill all required fields."); return; }
+        const submitBtn = document.getElementById('contactSubmitBtn');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<span class="loading-spinner"></span> Sending...';
+        submitBtn.disabled = true;
+        try {
+            await submitToGoogleSheets({ timestamp: new Date().toISOString(), firstName, lastName, email, phone, subject, message, page: "NAKHAT Homepage Contact" });
+            alert(`Thank you ${firstName}! Your message has been sent successfully.`);
+            document.getElementById('contactForm').reset();
+        } catch (error) {
+            alert("⚠️ There was an issue sending your message. Please try again.");
+        } finally { submitBtn.innerHTML = originalText; submitBtn.disabled = false; }
+    }
+    document.getElementById('contactForm')?.addEventListener('submit', handleContactSubmit);
+    
+    // Mobile menu
+    const menuToggleBtn = document.getElementById('menuToggleBtn');
+    const navLinks = document.getElementById('navLinks');
+    const menuOverlay = document.getElementById('menuOverlay');
+    function closeMenu() { navLinks.classList.remove('active'); if(menuToggleBtn) menuToggleBtn.classList.remove('active'); if(menuOverlay) menuOverlay.classList.remove('active'); document.body.style.overflow = ''; }
+    function openMenu() { navLinks.classList.add('active'); if(menuToggleBtn) menuToggleBtn.classList.add('active'); if(menuOverlay) menuOverlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
+    function toggleMenu() { if (navLinks.classList.contains('active')) closeMenu(); else openMenu(); }
+    if (menuToggleBtn) menuToggleBtn.addEventListener('click', toggleMenu);
+    if (menuOverlay) menuOverlay.addEventListener('click', closeMenu);
+    document.querySelectorAll('.nav-links a').forEach(link => link.addEventListener('click', closeMenu));
+    window.addEventListener('resize', () => { if (window.innerWidth > 768 && navLinks.classList.contains('active')) closeMenu(); });
+    
+    let heroIdx=0; const heroSlides=document.querySelectorAll('.hero-slide');
+    setInterval(()=>{ heroSlides[heroIdx].classList.remove('active'); heroIdx=(heroIdx+1)%heroSlides.length; heroSlides[heroIdx].classList.add('active'); },5000);
+    
+    renderProducts();
+    updateTestimonialCarousel();
+</script>
+</body>
+</html>

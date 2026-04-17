@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>NAKHAT Spices - Ingredients & Health Benefits | Heritage & Luxury</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: #F3EDE2; /* Nutmeg Beige / Vanilla Pod base */
+            color: #4F4A45; /* Peppercorn Gray text */
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark-mode {
+            background: #2A2A28;
+            color: #DCC9B6;
+        }
+
+        body.dark-mode .main-nav {
+            background: #5A3A2E;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        body.dark-mode .nav-link {
+            color: #DCC9B6;
+        }
+
+        body.dark-mode .nav-link:hover {
+            background: #D9A13B;
+            color: #4F4A45;
+        }
+
+        body.dark-mode .nav-link.active {
+            background: #D9A13B;
+            color: #4F4A45;
+        }
+
+        body.dark-mode .page-header h1 {
+            color: #D9A13B;
+        }
+
+        body.dark-mode .page-header p {
+            color: #B8A99A;
+        }
+
+        body.dark-mode .ingredients-container {
+            background: #3A3A35;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            border: 1px solid #6B3E2E;
+        }
+
+        body.dark-mode .ingredient-card {
+            background: #4A4A42;
+            border-left-color: #D9A13B;
+        }
+
+        body.dark-mode .ingredient-card:hover {
+            background: #5A5A50;
+        }
+
+        body.dark-mode .ingredient-card h3 {
+            color: #D9A13B;
+        }
+
+        body.dark-mode .ingredient-card p {
+            color: #DCC9B6;
+        }
+
+        body.dark-mode .benefit-badge {
+            background: #6B3E2E;
+            color: #F3EDE2;
+        }
+
+        body.dark-mode .footer {
+            background: #2A2A28;
+            color: #B8A99A;
+            border-top: 1px solid #6B3E2E;
+        }
+
+        body.dark-mode .footer a {
+            color: #D9A13B;
+        }
+
+        body.dark-mode .pdf-btn {
+            background: #6B3E2E;
+            color: #F3EDE2;
+        }
+
+        body.dark-mode .pdf-btn.download {
+            background: #5A3A2E;
+        }
+
+        body.dark-mode .pdf-btn:hover {
+            filter: brightness(1.15);
+        }
+
+        body.dark-mode .ingredients-container p[style*="background: #f9f6ef"] {
+            background: #4A4A42 !important;
+            color: #DCC9B6 !important;
+            border-left-color: #D9A13B !important;
+        }
+
+        body.dark-mode .collapse-btn {
+            background: #D9A13B !important;
+            color: #4F4A45 !important;
+        }
+
+        body.dark-mode .collapse-btn:hover {
+            background: #C48B2A !important;
+            color: #F3EDE2 !important;
+        }
+
+        .footer-theme-toggle {
+            background: #6B3E2E;
+            border: none;
+            border-radius: 50px;
+            padding: 0.6rem 1.2rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            color: #F3EDE2;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            margin: 1rem auto 0;
+        }
+
+        .footer-theme-toggle:hover {
+            background: #D9A13B;
+            transform: translateY(-2px);
+            color: #4F4A45;
+        }
+
+        body.dark-mode .footer-theme-toggle {
+            background: #D9A13B;
+            color: #4F4A45;
+        }
+
+        body.dark-mode .footer-theme-toggle:hover {
+            background: #F3EDE2;
+            color: #4F4A45;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .main-nav {
+            background: #6B3E2E; /* Mahogany - premium deep tone */
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: background 0.3s ease;
+            border-bottom: 2px solid #D9A13B;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            z-index: 1001;
+            flex-shrink: 0;
+        }
+
+        .logo-area img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #D9A13B;
+            padding: 5px;
+            object-fit: cover;
+            transition: all 0.3s ease;
+            border: 2px solid #D9A13B;
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #D9A13B; /* Saffron Gold - luxurious accent */
+            letter-spacing: 1.5px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        @media (max-width: 768px) {
+            .logo-area img { width: 40px; height: 40px; }
+            .logo-text { font-size: 1rem; }
+        }
+
+        @media (max-width: 480px) {
+            .logo-area img { width: 35px; height: 35px; }
+            .logo-text { font-size: 0.9rem; }
+        }
+
+        @media (max-height: 500px) and (orientation: landscape) {
+            .main-nav { padding: 0.5rem 1.5rem; }
+            .logo-area img { width: 35px; height: 35px; }
+            .logo-text { font-size: 0.9rem; }
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: #F3EDE2;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: all 0.3s;
+            z-index: 1001;
+        }
+
+        .menu-toggle:hover {
+            color: #D9A13B;
+            transform: scale(1.05);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link {
+            color: #F3EDE2;
+            font-weight: 600;
+            padding: 0.6rem 1.2rem;
+            border-radius: 40px;
+            transition: all 0.3s;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            cursor: pointer;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-link:hover {
+            background: #D9A13B;
+            color: #4F4A45;
+            transform: translateY(-2px);
+            letter-spacing: 0.5px;
+        }
+
+        .nav-link.active {
+            background: #D9A13B !important;
+            color: #4F4A45 !important;
+        }
+
+        .nav-link.order-now {
+            background: transparent;
+            color: #F3EDE2;
+            font-weight: 600;
+        }
+
+        .nav-link.order-now:hover {
+            background: #D9A13B;
+            color: #4F4A45;
+        }
+
+        body.dark-mode .nav-link.order-now {
+            background: transparent;
+            color: #DCC9B6;
+        }
+
+        body.dark-mode .nav-link.order-now:hover {
+            background: #D9A13B;
+            color: #4F4A45;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            color: #6B3E2E;
+            font-size: 2.5rem;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.05);
+            transition: color 0.3s;
+            letter-spacing: -0.3px;
+        }
+
+        .page-header p {
+            color: #7A6B5D;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .pdf-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .pdf-btn {
+            background: #6B3E2E;
+            color: #F3EDE2;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            letter-spacing: 0.5px;
+        }
+
+        .pdf-btn.download {
+            background: #5A3A2E;
+        }
+
+        .pdf-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.05);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        .ingredients-container {
+            background: #FFFFFF;
+            border-radius: 28px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(107, 62, 46, 0.08);
+            border: 1px solid rgba(217, 161, 59, 0.2);
+            transition: background 0.3s ease, border 0.3s ease;
+        }
+
+        .ingredient-card {
+            border-left: 5px solid #D9A13B;
+            margin-bottom: 1.8rem;
+            padding: 1.2rem 1.5rem;
+            background: #FFFFFF;
+            border-radius: 20px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+
+        .ingredient-card:hover {
+            transform: translateX(5px);
+            background: #FFFCF8;
+            border-left-color: #C48B2A;
+        }
+
+        .ingredient-card h3 {
+            color: #6B3E2E;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ingredient-card p {
+            color: #4F4A45;
+            line-height: 1.7;
+        }
+
+        .benefit-badge {
+            display: inline-block;
+            background: #F3EDE2;
+            color: #6B3E2E;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 10px;
+            margin-right: 8px;
+        }
+
+        .collapse-wrapper {
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .collapse-btn {
+            background: #D9A13B !important;
+            color: #4F4A45 !important;
+            border: none !important;
+            padding: 12px 32px !important;
+            border-radius: 50px !important;
+            font-size: 1rem !important;
+            font-weight: 700 !important;
+            cursor: pointer !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 12px !important;
+            transition: all 0.3s !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+            letter-spacing: 0.5px;
+        }
+
+        .collapse-btn:hover {
+            background: #C48B2A !important;
+            color: #F3EDE2 !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.15) !important;
+        }
+
+        .more-ingredients {
+            display: none;
+        }
+
+        .more-ingredients.show {
+            display: block;
+        }
+
+        .footer {
+            background: #4F4A45;
+            color: #B8A99A;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            transition: background 0.3s ease, color 0.3s ease;
+            border-top: 3px solid #D9A13B;
+        }
+
+        .footer a {
+            color: #D9A13B;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .footer a:hover {
+            color: #F3EDE2;
+            text-decoration: underline;
+        }
+
+        .footer-address {
+            margin: 1rem 0;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .footer-address i {
+            margin-right: 8px;
+            color: #D9A13B;
+        }
+
+        .footer-address p {
+            margin: 8px 0;
+        }
+
+        .footer-company {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+            color: #D9A13B;
+        }
+
+        @media (max-width: 768px) {
+            .main-nav { padding: 0.8rem 1rem; position: relative; }
+            .menu-toggle { display: block; }
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                left: -280px;
+                width: 260px;
+                height: 100vh;
+                background: #6B3E2E;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding: 5rem 1.5rem 2rem;
+                gap: 1rem;
+                box-shadow: 4px 0 20px rgba(0,0,0,0.2);
+                transition: left 0.3s ease-in-out;
+                z-index: 1000;
+                border-radius: 0 20px 20px 0;
+            }
+            body.dark-mode .nav-menu { background: #5A3A2E; }
+            .nav-menu.active { left: 0; }
+            .nav-link { width: 100%; padding: 0.8rem 1rem; font-size: 1rem; }
+            .menu-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(79, 74, 69, 0.7);
+                z-index: 999;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s;
+            }
+            .menu-overlay.active { opacity: 1; visibility: visible; }
+            .container { padding: 1.5rem; }
+            .ingredient-card { padding: 1rem; }
+            .page-header h1 { font-size: 1.8rem; }
+            .footer-address { font-size: 0.85rem; }
+            .footer-company { font-size: 1rem; }
+        }
+
+        @media (max-width: 480px) {
+            .page-header h1 { font-size: 1.5rem; }
+            .page-header p { font-size: 0.9rem; }
+            .pdf-btn { padding: 10px 18px; font-size: 0.8rem; }
+            .ingredient-card h3 { font-size: 1rem; }
+            .ingredient-card p { font-size: 0.85rem; }
+        }
+
+        @media (max-height: 500px) and (orientation: landscape) {
+            .container { padding: 1rem; }
+            .ingredient-card { margin-bottom: 1rem; padding: 0.8rem 1rem; }
+            .page-header { margin-bottom: 1rem; }
+            .page-header h1 { font-size: 1.4rem; }
+            .ingredients-container { padding: 1rem; }
+            .footer { padding: 1rem; margin-top: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-nav">
+    <div class="logo-area">
+        <img src="Nakhat_logo.png" alt="NAKHAT Logo" onerror="this.src='https://placehold.co/100x100/D9A13B/6B3E2E?text=NAKHAT'">
+        <span class="logo-text">NAKHAT</span>
+    </div>
+    
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <div class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#products" class="nav-link">Products</a>
+        <a href="order.html" class="nav-link order-now">Order Now</a>
+        <a href="index.html#testimonials-section" class="nav-link">Testimonials</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+    </div>
+</div>
+<div class="menu-overlay" id="menuOverlay"></div>
+
+<div class="container">
+    <div class="page-header">
+        <h1>Natural Ingredients & Health Benefits</h1>
+        <p>Discover the powerful healing properties of authentic Nigerian spices — 100% pure, natural, and crafted with heritage</p>
+    </div>
+
+    <div class="pdf-actions">
+        <button id="viewPdfBtn" class="pdf-btn"><i class="fas fa-eye"></i> View Full PDF</button>
+        <button id="downloadPdfBtn" class="pdf-btn download"><i class="fas fa-download"></i> Download PDF</button>
+    </div>
+
+    <div class="ingredients-container" id="ingredientsContent">
+        <h2 style="color:#6B3E2E; margin-bottom: 1.5rem;">Key Spices & Their Wellness Benefits</h2>
+        
+        <div class="ingredient-card">
+            <h3>Turmeric (Curcumin)</h3>
+            <p><strong>Benefits:</strong> Powerful anti-inflammatory and antioxidant properties. Supports joint health, boosts immunity, enhances brain function, and may reduce risk of chronic diseases. Helps with arthritis and digestive health.</p>
+            <span class="benefit-badge">✨ Anti-inflammatory</span>
+            <span class="benefit-badge">🧠 Brain Health</span>
+        </div>
+
+        <div class="ingredient-card">
+            <h3>Cumin</h3>
+            <p><strong>Benefits:</strong> Aids digestion, rich in iron for energy, contains powerful antioxidants that neutralize free radicals. May improve blood cholesterol, blood sugar control, and promote weight loss.</p>
+            <span class="benefit-badge">💪 Digestive Aid</span>
+            <span class="benefit-badge">🩸 Blood Sugar Control</span>
+        </div>
+
+        <div class="ingredient-card">
+            <h3>Ginger</h3>
+            <p><strong>Benefits:</strong> Relieves nausea and morning sickness, reduces muscle pain and soreness, powerful anti-inflammatory effects. Supports cardiovascular health, lowers blood sugar, and helps with chronic indigestion.</p>
+            <span class="benefit-badge">🌿 Nausea Relief</span>
+            <span class="benefit-badge">❤️ Heart Health</span>
+        </div>
+
+        <div class="ingredient-card">
+            <h3>Garlic</h3>
+            <p><strong>Benefits:</strong> Boosts immune system, lowers blood pressure and cholesterol. Contains allicin with potent antimicrobial properties, helps fight colds and infections, and may reduce risk of heart disease.</p>
+            <span class="benefit-badge">🛡️ Immunity Booster</span>
+            <span class="benefit-badge">💓 Heart Health</span>
+        </div>
+
+        <div class="ingredient-card">
+            <h3>Fenugreek</h3>
+            <p><strong>Benefits:</strong> Helps lower blood sugar levels, improves milk production in nursing mothers, reduces cholesterol, eases menstrual cramps and inflammation. Rich in soluble fiber.</p>
+            <span class="benefit-badge">💚 Blood Sugar Control</span>
+            <span class="benefit-badge">🤱 Lactation Support</span>
+        </div>
+
+        <div class="ingredient-card">
+            <h3>Cloves</h3>
+            <p><strong>Benefits:</strong> Rich in antioxidants, anti-inflammatory and analgesic properties. Supports oral health, improves liver health, aids digestion, and contains eugenol which helps with toothache.</p>
+            <span class="benefit-badge">🦷 Oral Health</span>
+            <span class="benefit-badge">🔥 Pain Relief</span>
+        </div>
+
+        <div class="ingredient-card">
+            <h3>Thyme</h3>
+            <p><strong>Benefits:</strong> Antifungal and antimicrobial properties, helps respiratory health as an expectorant, rich in vitamin C for immunity, reduces inflammation, and may help with coughs and bronchitis.</p>
+            <span class="benefit-badge">🌬️ Respiratory Support</span>
+            <span class="benefit-badge">🦠 Antimicrobial</span>
+        </div>
+
+        <div class="ingredient-card">
+            <h3>Black Pepper</h3>
+            <p><strong>Benefits:</strong> Enhances nutrient absorption (especially curcumin by 2000%), antioxidant and anti-inflammatory, aids digestion, stimulates metabolism, and promotes gut health.</p>
+            <span class="benefit-badge">⚡ Absorption Enhancer</span>
+            <span class="benefit-badge">🔥 Metabolism Boost</span>
+        </div>
+
+        <div class="ingredient-card">
+            <h3>Coriander</h3>
+            <p><strong>Benefits:</strong> May lower blood sugar, rich in antioxidants, supports heart and brain health, promotes healthy digestion, reduces bloating, and has antimicrobial properties.</p>
+            <span class="benefit-badge">❤️ Heart Health</span>
+            <span class="benefit-badge">🧠 Brain Support</span>
+        </div>
+
+        <div class="ingredient-card">
+            <h3>Nutmeg</h3>
+            <p><strong>Benefits:</strong> Improves digestion, natural mood booster, may relieve anxiety and aid sleep, has anti-inflammatory compounds, promotes oral health, and aids detoxification.</p>
+            <span class="benefit-badge">😴 Sleep Aid</span>
+            <span class="benefit-badge">😊 Mood Enhancer</span>
+        </div>
+
+        <div class="ingredient-card">
+            <h3>Chili Pepper (Capsaicin)</h3>
+            <p><strong>Benefits:</strong> Boosts metabolism, natural pain relief, supports heart health by improving blood flow, antimicrobial properties, and may help fight inflammation.</p>
+            <span class="benefit-badge">⚡ Metabolism Boost</span>
+            <span class="benefit-badge">💪 Pain Relief</span>
+        </div>
+
+        <div class="ingredient-card">
+            <h3>Bay Leaf</h3>
+            <p><strong>Benefits:</strong> May improve insulin function for diabetes management, helps regulate cholesterol levels, rich in antioxidants, aids digestion, and has anti-inflammatory properties.</p>
+            <span class="benefit-badge">🩸 Diabetes Support</span>
+            <span class="benefit-badge">🫀 Cholesterol Control</span>
+        </div>
+
+        <div class="more-ingredients" id="moreIngredients">
+            <div class="ingredient-card">
+                <h3>Cardamom</h3>
+                <p><strong>Benefits:</strong> Detoxifies the body, improves blood circulation, aids digestion, freshens breath, contains antioxidants that fight inflammation, and may help lower blood pressure.</p>
+                <span class="benefit-badge">💚 Detoxification</span>
+                <span class="benefit-badge">🩸 Circulation</span>
+            </div>
+
+            <div class="ingredient-card">
+                <h3>Cinnamon</h3>
+                <p><strong>Benefits:</strong> Powerful antioxidant and anti-inflammatory properties, helps regulate blood sugar, reduces heart disease risk factors, protects brain function, and fights bacterial infections.</p>
+                <span class="benefit-badge">🍬 Blood Sugar Regulator</span>
+                <span class="benefit-badge">❤️ Heart Protection</span>
+            </div>
+
+            <div class="ingredient-card">
+                <h3>Oregano</h3>
+                <p><strong>Benefits:</strong> Rich in antioxidants, powerful antimicrobial and antifungal properties, supports immune health, reduces inflammation, aids respiratory health, and promotes gut health.</p>
+                <span class="benefit-badge">🦠 Antimicrobial</span>
+                <span class="benefit-badge">🛡️ Immunity</span>
+            </div>
+
+            <div class="ingredient-card">
+                <h3>Rosemary</h3>
+                <p><strong>Benefits:</strong> Enhances memory and concentration, rich in antioxidants, anti-inflammatory properties, supports hair growth, improves circulation, and may reduce stress.</p>
+                <span class="benefit-badge">🧠 Memory Boost</span>
+                <span class="benefit-badge">💆 Stress Relief</span>
+            </div>
+
+            <div class="ingredient-card">
+                <h3>Saffron</h3>
+                <p><strong>Benefits:</strong> Natural mood enhancer, rich in antioxidants, may improve libido, supports eye health, helps with PMS symptoms, and has anti-cancer properties.</p>
+                <span class="benefit-badge">😊 Mood Enhancer</span>
+                <span class="benefit-badge">👁️ Eye Health</span>
+            </div>
+
+            <div class="ingredient-card">
+                <h3>Fennel Seeds</h3>
+                <p><strong>Benefits:</strong> Aids digestion, relieves bloating and gas, rich in fiber and antioxidants, supports hormonal balance, helps with respiratory health, and freshens breath naturally.</p>
+                <span class="benefit-badge">💨 Bloating Relief</span>
+                <span class="benefit-badge">⚖️ Hormonal Balance</span>
+            </div>
+
+            <div class="ingredient-card">
+                <h3>Mustard Seeds</h3>
+                <p><strong>Benefits:</strong> Rich in selenium and magnesium, supports bone health, boosts metabolism, anti-inflammatory properties, may relieve muscle pain, and aids respiratory health.</p>
+                <span class="benefit-badge">🦴 Bone Health</span>
+                <span class="benefit-badge">⚡ Metabolism</span>
+            </div>
+
+            <div class="ingredient-card">
+                <h3>Paprika</h3>
+                <p><strong>Benefits:</strong> Rich in vitamin A and C, supports eye health, boosts immunity, contains capsaicin for pain relief, improves circulation, and has antioxidant properties.</p>
+                <span class="benefit-badge">👁️ Eye Health</span>
+                <span class="benefit-badge">🛡️ Immune Support</span>
+            </div>
+        </div>
+
+        <div class="collapse-wrapper">
+            <button id="collapseBtn" class="collapse-btn">
+                <i class="fas fa-plus-circle"></i> Show More Ingredients (8 more)
+            </button>
+        </div>
+
+        <p style="margin-top: 2rem; text-align: center; font-style: italic; color: #4F4A45; padding: 1rem; background: #F3EDE2; border-radius: 20px; border-left: 4px solid #D9A13B; transition: all 0.3s;">
+            <i class="fas fa-check-circle" style="color:#D9A13B;"></i> All NAKHAT spice blends are 100% natural, no artificial additives, colors, or preservatives. Made with passion in Nigeria.
+        </p>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="footer-company">
+        <i class="fas fa-mortar-pestle"></i> NAKHAT Spices — 3TRIPPLE BITES CORNER LTD
+    </div>
+    
+    <div class="footer-address">
+        <p><i class="fas fa-industry"></i> <strong>Factory:</strong> No. 8, New Arkilla Layout, Sokoto, Wamakko LGA, Sokoto State</p>
+        <p><i class="fas fa-building"></i> <strong>Head Office:</strong> No. 37B Isa Kaita Road, Kaduna, Kaduna State</p>
+        <p><i class="fas fa-envelope"></i> <strong>Email:</strong> <a href="mailto:3triplebiteslimited01@gmail.com">3triplebiteslimited01@gmail.com</a></p>
+        <p><i class="fas fa-phone"></i> <strong>Phone:</strong> <a href="tel:+2348032519455">08032519455</a></p>
+    </div>
+    
+    <button id="footerDarkModeToggle" class="footer-theme-toggle">
+        <i class="fas fa-moon"></i> <span id="footerToggleText">Dark Mode</span>
+    </button>
+    
+    <p style="margin-top: 1rem; font-size: 0.75rem; opacity: 0.7;">© 2025 Authentic Nigerian Flavors. All rights reserved. | Certified Natural Spices</p>
+</footer>
+
+<script>
+    const collapseBtn = document.getElementById('collapseBtn');
+    const moreIngredients = document.getElementById('moreIngredients');
+    let isExpanded = false;
+
+    if (collapseBtn) {
+        collapseBtn.addEventListener('click', () => {
+            isExpanded = !isExpanded;
+            if (isExpanded) {
+                moreIngredients.classList.add('show');
+                collapseBtn.innerHTML = '<i class="fas fa-minus-circle"></i> Show Less Ingredients';
+            } else {
+                moreIngredients.classList.remove('show');
+                collapseBtn.innerHTML = '<i class="fas fa-plus-circle"></i> Show More Ingredients (8 more)';
+            }
+        });
+    }
+
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+    const menuOverlay = document.getElementById('menuOverlay');
+    
+    function closeMenu() {
+        navMenu.classList.remove('active');
+        menuOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    function openMenu() {
+        navMenu.classList.add('active');
+        menuOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    if (menuToggle) {
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (navMenu.classList.contains('active')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+    }
+    
+    if (menuOverlay) {
+        menuOverlay.addEventListener('click', closeMenu);
+    }
+    
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                closeMenu();
+            }
+        });
+    });
+    
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
+            closeMenu();
+        }
+    });
+    
+    const footerToggleBtn = document.getElementById('footerDarkModeToggle');
+    const footerToggleTextSpan = document.getElementById('footerToggleText');
+    const footerIcon = footerToggleBtn ? footerToggleBtn.querySelector('i') : null;
+    
+    const savedTheme = localStorage.getItem('nakhatTheme');
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        updateFooterToggleUI(true);
+    } else {
+        updateFooterToggleUI(false);
+    }
+    
+    function updateFooterToggleUI(isDark) {
+        if (!footerToggleTextSpan || !footerIcon) return;
+        if (isDark) {
+            footerToggleTextSpan.textContent = 'Light Mode';
+            footerIcon.className = 'fas fa-sun';
+        } else {
+            footerToggleTextSpan.textContent = 'Dark Mode';
+            footerIcon.className = 'fas fa-moon';
+        }
+    }
+    
+    if (footerToggleBtn) {
+        footerToggleBtn.addEventListener('click', () => {
+            const isDark = document.body.classList.toggle('dark-mode');
+            localStorage.setItem('nakhatTheme', isDark ? 'dark' : 'light');
+            updateFooterToggleUI(isDark);
+        });
+    }
+    
+    async function generatePDF() {
+        const wasExpanded = isExpanded;
+        if (!wasExpanded && moreIngredients) {
+            moreIngredients.classList.add('show');
+        }
+        
+        const element = document.getElementById('ingredientsContent');
+        
+        const cloneContainer = document.createElement('div');
+        cloneContainer.style.padding = '30px';
+        cloneContainer.style.fontFamily = "'Open Sans', 'Montserrat', sans-serif";
+        cloneContainer.style.maxWidth = '800px';
+        cloneContainer.style.margin = '0 auto';
+        cloneContainer.style.backgroundColor = '#FFFFFF';
+        cloneContainer.style.color = '#4F4A45';
+        
+        const header = document.createElement('div');
+        header.style.textAlign = 'center';
+        header.style.borderBottom = '3px solid #D9A13B';
+        header.style.paddingBottom = '20px';
+        header.style.marginBottom = '20px';
+        header.innerHTML = `
+            <img src="nakhat.jpg" style="width: 80px; border-radius: 50%;" onerror="this.style.display='none'">
+            <h1 style="color:#6B3E2E; margin:10px 0 5px;">NAKHAT Spices</h1>
+            <h2 style="color:#7A6B5D;">Ingredients & Their Health Benefits</h2>
+            <p style="font-size:14px; color:#6B3E2E;">Authentic Nigerian Spice Blends — Pure & Natural</p>
+        `;
+        cloneContainer.appendChild(header);
+        
+        const contentClone = element.cloneNode(true);
+        contentClone.style.padding = '10px';
+        contentClone.style.background = '#FFFFFF';
+        contentClone.style.borderRadius = '20px';
+        const cards = contentClone.querySelectorAll('.ingredient-card');
+        cards.forEach(card => {
+            card.style.borderLeftColor = '#D9A13B';
+            card.style.backgroundColor = '#FFFFFF';
+            card.style.color = '#4F4A45';
+        });
+        
+        const btnWrapper = contentClone.querySelector('.collapse-wrapper');
+        if (btnWrapper) btnWrapper.style.display = 'none';
+        
+        const notePara = contentClone.querySelector('p[style*="background: #F3EDE2"]');
+        if (notePara) {
+            notePara.style.backgroundColor = '#F3EDE2';
+            notePara.style.color = '#4F4A45';
+            notePara.style.borderLeftColor = '#D9A13B';
+        }
+        cloneContainer.appendChild(contentClone);
+        
+        const footer = document.createElement('div');
+        footer.style.marginTop = '30px';
+        footer.style.textAlign = 'center';
+        footer.style.fontSize = '12px';
+        footer.style.color = '#6B3E2E';
+        footer.style.borderTop = '1px solid #DCC9B6';
+        footer.style.paddingTop = '20px';
+        footer.innerHTML = `<p>© 2025 NAKHAT Spices — 3TRIPPLE BITES CORNER LTD<br>Contact: 08032519455 | Made in Nigeria | Earth-friendly spices</p>`;
+        cloneContainer.appendChild(footer);
+        
+        const opt = {
+            margin: [0.5, 0.5, 0.5, 0.5],
+            filename: 'NAKHAT_Spices_Ingredients_Benefits.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, letterRendering: true, backgroundColor: '#FFFFFF' },
+            jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+        };
+        
+        const pdfBlob = await html2pdf().set(opt).from(cloneContainer).outputPdf('blob');
+        
+        if (!wasExpanded && moreIngredients) {
+            moreIngredients.classList.remove('show');
+        }
+        
+        return pdfBlob;
+    }
+
+    const viewBtn = document.getElementById('viewPdfBtn');
+    const downloadBtn = document.getElementById('downloadPdfBtn');
+    
+    if (viewBtn) {
+        viewBtn.addEventListener('click', async () => {
+            try {
+                const blob = await generatePDF();
+                const url = URL.createObjectURL(blob);
+                window.open(url, '_blank');
+                setTimeout(() => URL.revokeObjectURL(url), 1000);
+            } catch (error) {
+                console.error('PDF error:', error);
+                alert('Unable to generate PDF. Please try again.');
+            }
+        });
+    }
+
+    if (downloadBtn) {
+        downloadBtn.addEventListener('click', async () => {
+            try {
+                const blob = await generatePDF();
+                const link = document.createElement('a');
+                const url = URL.createObjectURL(blob);
+                link.href = url;
+                link.download = 'NAKHAT_Spices_Ingredients_Benefits.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                setTimeout(() => URL.revokeObjectURL(url), 200);
+            } catch (error) {
+                console.error('Download error:', error);
+                alert('Failed to download PDF. Please try again.');
+            }
+        });
+    }
+
+    document.querySelectorAll('img').forEach(img => {
+        img.onerror = function() {
+            if (!this.dataset.fixed) {
+                this.dataset.fixed = 'true';
+                this.src = 'https://placehold.co/100x100/D9A13B/6B3E2E?text=NAKHAT';
+            }
+        };
+    });
+</script>
+</body>
+</html>
